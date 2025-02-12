@@ -2,6 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -39,6 +42,18 @@ public class MemberDAO {
 			pstat.setString(8, dto.getAddress2());
 
 			pstat.executeUpdate();
+		}
+	}
+	
+	public List<MemberDTO> selectbyadd() throws Exception{	//mypage
+		String sql = "select * from members";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql); ResultSet rs = pstat.executeQuery();){
+			List<MemberDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				MemberDTO dto = new MemberDTO(rs.getString("id"), rs.getString("pw"),rs.getString("name"),rs.getString("email"),rs.getString("tel"),rs.getInt("post"),rs.getString("address1"),rs.getString("address2"),rs.getTimestamp("date"));
+				list.add(dto);
+			}
+			return list;
 		}
 	}
 }
