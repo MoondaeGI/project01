@@ -20,11 +20,11 @@
 			<th>상세 주소</th>
 			<th>가입날짜</th>
 		</tr>
-		<c:forEach var = "i" items = "${ }">
+		<c:forEach var = "i" items = "${qweqwe }">
 		<tr>
 		<td> </td>
 		<td> </td>
-		<td> </td>
+		<td> </td>	
 		<td> </td>
 		<td> </td>
 		<td> </td>
