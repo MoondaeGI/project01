@@ -56,4 +56,17 @@ public class MemberDAO {
 			return list;
 		}
 	}
+	
+	public int updateByID(String id, String tel, String email, int post, String address1, String address2) throws Exception{	//mypage 수정하기
+		String sql = "update members set tel=?,email=?,post=?,address1=?,address2=? where id=?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql)) {
+			pstat.setString(1, tel);
+			pstat.setString(2, email);
+			pstat.setInt(3, post);
+			pstat.setString(4, address1);
+			pstat.setString(5, address2);
+			pstat.setString(6, id);
+			return pstat.executeUpdate();
+		}
+	}
 }
