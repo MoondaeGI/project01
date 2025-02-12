@@ -98,6 +98,7 @@ public class MemberDTO {
 		this.address2 = address2;
 		this.date = date;
 	}
+	// test!!wqeqweweq(최보람 테스트!)
 
 	public MemberDTO() {
 		super();
