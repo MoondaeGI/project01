@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 </head>
 <body>
-	ㅎㅇㅇ
+	깃 담당다 클났다~
 </body>
 </html>
