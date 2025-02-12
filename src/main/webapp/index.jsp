@@ -1,14 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <title>CodeQuest On</title>
+    <title>Responsive Game Portal</title>
     <style>
         /* 기본 스타일 */
         * {
@@ -43,7 +42,7 @@
         .header, .footer {
             width: 100%;
             height: 80px;
-            background: #007bff;
+            background: #f0f9d8;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -70,13 +69,13 @@
         .navi ul li {
             padding: 10px 15px;
             background: white;
-            color: #007bff;
+            color: #f5ffc2;
             border-radius: 5px;
             cursor: pointer;
             transition: 0.3s ease-in-out;
         }
         .navi ul li:hover {
-            background: #0056b3;
+            background: #eef3e1;
             color: white;
         }
 
@@ -113,7 +112,7 @@
             height: 8px;
         }
         .gameList::-webkit-scrollbar-thumb {
-            background: #007bff;
+            background: #dfe4c7;
             border-radius: 10px;
         }
         .gameList::-webkit-scrollbar-track {
@@ -142,7 +141,7 @@
         .game button {
             width: 100%;
             padding: 10px;
-            background-color: #007bff;
+            background-color: #e6f6c0;
             color: white;
             border: none;
             border-radius: 5px;
@@ -150,7 +149,7 @@
             transition: background 0.3s;
         }
         .game button:hover {
-            background: #0056b3;
+            background: #eaf1dc;
         }
 
         /* 로그인 박스 */
@@ -286,4 +285,5 @@
             });
         });
     </script>
-
+</body>
+</html>
