@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class MemberDAO {
 		return ds.getConnection();
 	}
 
-	public void createByMember(MemberDTO dto) throws Exception {
+	public void createById(MemberDTO dto) throws Exception {
 		String sql = "insert into members (id, pw, name, email, phone, postcode, address1, address2) "
 				+ "values (?, ?, ?, ?, ?, ?, ?, ?)";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -44,29 +45,70 @@ public class MemberDAO {
 			pstat.executeUpdate();
 		}
 	}
-	
-	public List<MemberDTO> selectbyadd() throws Exception{	//mypage
+
+	public List<MemberDTO> readAll() throws Exception {
 		String sql = "select * from members";
-		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql); ResultSet rs = pstat.executeQuery();){
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
 			List<MemberDTO> list = new ArrayList<>();
-			while(rs.next()) {
-				MemberDTO dto = new MemberDTO(rs.getString("id"), rs.getString("pw"),rs.getString("name"),rs.getString("email"),rs.getString("tel"),rs.getInt("post"),rs.getString("address1"),rs.getString("address2"),rs.getTimestamp("date"));
-				list.add(dto);
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String name = rs.getString("name");
+				String tel = rs.getString("tel");
+				String email = rs.getString("email");
+				int post = rs.getInt("post");
+				String address1 = rs.getString("address1");
+				String address2 = rs.getString("address2");
+				Timestamp date = rs.getTimestamp("signup_date");
+				list.add(new MemberDTO(id, name, tel, email, post, address1, address2, date));
 			}
 			return list;
 		}
 	}
-	
-	public int updateByID(String id, String tel, String email, int post, String address1, String address2) throws Exception{	//mypage 수정하기
-		String sql = "update members set tel=?,email=?,post=?,address1=?,address2=? where id=?";
-		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql)) {
-			pstat.setString(1, tel);
-			pstat.setString(2, email);
-			pstat.setInt(3, post);
-			pstat.setString(4, address1);
-			pstat.setString(5, address2);
-			pstat.setString(6, id);
+
+	public int updateById(MemberDTO dto) throws Exception {
+		String sql = "update members set name =?, email=?, phone=?, postcode=?, address1=?, address2=? where id = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, dto.getName());
+			pstat.setString(2, dto.getEmail());
+			pstat.setString(3, dto.getTel());
+			pstat.setInt(4, dto.getPost());
+			pstat.setString(5, dto.getAddress1());
+			pstat.setString(6, dto.getAddress2());
+			pstat.setString(7, dto.getId());
+
 			return pstat.executeUpdate();
 		}
 	}
+
+	public int deleteById(String id) throws Exception {
+		String sql = "delete from members where id = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+
+	public MemberDTO findById(String id) throws Exception {
+		String sql = "select * from members where id = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+			try (ResultSet rs = pstat.executeQuery()) {
+				if (rs.next()) {
+					String name = rs.getString("name");
+					String email = rs.getString("email");
+					String tel = rs.getString("phone");
+					int post = rs.getInt("postcode");
+					String address1 = rs.getString("address1");
+					String address2 = rs.getString("address2");
+					Timestamp date = rs.getTimestamp("signup_date");
+					return new MemberDTO(id, name, email, tel, post, address1, address2, date);
+				}
+			}
+		}
+		return null;
+	}
+
 }

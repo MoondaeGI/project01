@@ -86,7 +86,7 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(String id, String pw, String name, String email, String tel, int post, String address1,
-			String address2, Timestamp date) {
+			String address2) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -96,9 +96,31 @@ public class MemberDTO {
 		this.post = post;
 		this.address1 = address1;
 		this.address2 = address2;
+	}
+
+	public MemberDTO(String id, String name, String email, String tel, int post, String address1, String address2,
+			Timestamp date) { // readAll
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.tel = tel;
+		this.post = post;
+		this.address1 = address1;
+		this.address2 = address2;
 		this.date = date;
 	}
-	// test!!wqeqweweq(최보람 테스트!)
+
+	public MemberDTO(String id, String name, String email, String tel, int post, String address1, String address2) { // readAll
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.tel = tel;
+		this.post = post;
+		this.address1 = address1;
+		this.address2 = address2;
+	}
 
 	public MemberDTO() {
 		super();
