@@ -33,14 +33,12 @@ public class MemberController extends HttpServlet {
 				String encryptPw = EncryptionUtils.encrypt(pw);
 				String name = request.getParameter("name");
 				String email = request.getParameter("email");
-				String tel = request.getParameter("tel");
-				int post = Integer.parseInt(request.getParameter("post"));
+				String tel = request.getParameter("phone");
+				int post = Integer.parseInt(request.getParameter("postcode"));
 				String address1 = request.getParameter("address1");
 				String address2 = request.getParameter("address2");
 				System.out.println("가입요청 : " + ip);
 				memberDao.createById(new MemberDTO(id, encryptPw, name, email, tel, post, address1, address2));
-				response.sendRedirect("/");
-
 			} else if (cmd.equals("/mypage.member")) {
 				request.getSession().getAttribute("dto");
 				request.getRequestDispatcher("/members/mypage.jsp").forward(request, response);
